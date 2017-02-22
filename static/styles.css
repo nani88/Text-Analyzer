@@ -1,0 +1,42 @@
+p
+{
+	text-align:center;
+	font-family:Monotype Corsiva;
+	color:red;
+	font-size:25px;
+	
+}
+
+.register
+{
+	width:1300px;
+	margin:10px auto;
+	padding:10px;
+	border:7px solid pink;
+	border-radius:10px;
+	font-family:Monotype Corsiva;
+	color:gery;
+	background-color:transparent;
+	box-shadow:0 0 20px 0 black;
+	font-size:25px;
+}
+th
+{
+	font-size:25px;
+	text-align:center;
+	color:blue;
+}
+td
+{
+	font-size:20px;
+	text-align:center;
+}
+h1
+{
+	margin:0 15px 20px;
+	border-bottom:2px solid green;
+	padding:5px 10px 5px 0;
+	font-size:35px;
+	color:red;
+	text-align:center;
+}

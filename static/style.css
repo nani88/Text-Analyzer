@@ -1,0 +1,61 @@
+p
+{
+	text-align:center;
+	font-family:Monotype Corsiva;
+	color:red;
+	font-size:25px;
+	
+}
+
+.register
+{
+	width:500px;
+	margin:10px auto;
+	padding:10px;
+	border:7px solid pink;
+	border-radius:10px;
+	font-family:Monotype Corsiva;
+	color:gery;
+	background-color:transparent;
+	box-shadow:0 0 20px 0 black;
+	font-size:25px;
+}
+h1
+{
+	margin:0 15px 20px;
+	border-bottom:2px solid green;
+	padding:5px 10px 5px 0;
+	font-size:35px;
+	color:red;
+	text-align:center;
+}
+label
+{
+	display:inline-block;
+	width:25%;
+	text-align:right;
+	margin:10px;
+	color:blue;
+	font-size:30px;
+}
+input[type=text],textarea
+{
+	width:50%;
+	font-family:Monotype Corsiva;
+	padding:5px;
+	font-size:22px;
+	border-radius:5px;
+	background:rgba(0,0,0,0.07);
+}
+.button
+{
+	font-size:25px;
+	border-radius:10px;
+	font-family:Monotype Corsiva;
+	padding:5px;
+	border:2px solid yellow;
+	box-shadow:0 0 5px 0 black;
+	background-color:transparent;
+	color:green;
+	
+}

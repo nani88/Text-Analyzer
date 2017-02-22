@@ -1,0 +1,17 @@
+<html>
+<head>
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+<div class=register>
+<h1>Summarizer Form</h1>
+<form action="{{url_for('summarizeCode')}}" method='post'>
+<label>Text</label>
+<textarea name='text' cols=50 rows=10> 
+</textarea>
+<label></label>
+<input type='submit' value='Analyse' class='button'>
+</form>
+</div>
+</body>
+</html>
