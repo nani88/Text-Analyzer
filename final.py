@@ -4,7 +4,7 @@ import Algorithmia
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
 
-@app.route('/summarize/',methods=['GET','POST'])
+@app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
         input=request.form['text']
