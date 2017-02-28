@@ -1,4 +1,6 @@
 from flask import Flask,render_template,request,redirect,url_for
+import random
+import os 
 app=Flask(__name__)
 import Algorithmia
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
@@ -19,5 +21,5 @@ def summarizeCode():
         return render_template('summarizerform.html')
 
 if __name__=='__main__':
-    app.debug=True
-    app.run(host='0.0.0.0',port=5000)
+    port=int(os.environ.get("PORT",5000))
+    app.run(debug=True,port=port)
