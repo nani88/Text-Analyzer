@@ -16,6 +16,10 @@ def summarizeCode():
         summ=algo.pipe(request.form['text']).result
         tag=alg.pipe(request.form['text']).result
         sent=al.pipe(request.form['text']).result
+        if sent>0:
+            sen=sent,"Input text contains more positive elements."
+        else:
+            sen=sent,"Input text contains more negative elements."
         return render_template('summary.html',summ=summ,input=input,sent=sent,tag=tag)
     else:
         return render_template('summarizerform.html')
