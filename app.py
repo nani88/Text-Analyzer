@@ -20,7 +20,7 @@ def summarizeCode():
             sen=sent,"Input text contains more positive elements."
         else:
             sen=sent,"Input text contains more negative elements."
-        return render_template('Summaryfinal.html',summ=summ,input=input,sent=sent,tag=tag)
+        return render_template('Summaryfinal.html',summ=summ,input=input,sen=sen,tag=tag)
     else:
         return render_template('summarizerform.html')
         print hello
