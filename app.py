@@ -16,11 +16,18 @@ def summarizeCode():
         summ=algo.pipe(request.form['text']).result
         tag=alg.pipe(request.form['text']).result
         sent=al.pipe(request.form['text']).result
-        if sent>0:
-            sen=sent,"Input text contains more positive elements."
+        senti=sent*20
+        if senti==20:
+            sen="This text is very weak."
+        elif senti==40:
+            sen="This text is weak."
+        elif senti==60:
+            sen="This text is neutral."
+        elif senti==80:
+            sen="This text is strong."
         else:
-            sen=sent,"Input text contains more negative elements."
-        return render_template('Summaryfinal.html',summ=summ,input=input,sen=sen,tag=tag)
+            sen="This text is very strong."
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,tag=tag)
     else:
         return render_template('summarizerform.html')
         print hello

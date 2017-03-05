@@ -6,6 +6,7 @@
         
         <link rel="shortcut icon" href="/static/favicon.ico">
         <link rel=stylesheet type=text/css href="{{url_for('static',filename='bootstrap.min.css')}}">
+        <link rel=stylesheet type=text/css href="{{url_for('static',filename='circle.css')}}">
         <link rel=stylesheet type=text/css href="{{url_for('static',filename='bootstrap-responsive.css')}}">
         <link rel=stylesheet type=text/css href="{{url_for('static',filename='font-awesome.min.css')}}">
        <!-- <script src="/static/js/jquery-1.9.0.min.js" type="text/javascript"></script>
@@ -49,6 +50,16 @@
     {{summ}}
     </p>
     <h4>Sentiment-analysis</h4>
+      <div class="clearfix">
+
+                <div class="c100 p{{senti}}">
+                    <span>{{senti}}%</span>
+                    <div class="slice">
+                        <div class="bar"></div>
+                        <div class="fill"></div>
+                    </div>
+                </div>
+                </div>
     <p>{{sen}}</p>
     <h4>Tags</h4>
     <p>{{tag}}</p>
