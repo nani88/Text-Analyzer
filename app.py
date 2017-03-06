@@ -15,6 +15,7 @@ def summarizeCode():
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
         summ=algo.pipe(request.form['text']).result
         tag=alg.pipe(request.form['text']).result
+        tags=[stag.encode('utf-8') for stag in tag]
         sent=al.pipe(request.form['text']).result
         senti=sent*20
         if senti==20:
@@ -27,10 +28,9 @@ def summarizeCode():
             sen="This text is strong."
         else:
             sen="This text is very strong."
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,tag=tag)
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,tags=tags)
     else:
         return render_template('summarizerform.html')
-        print hello
 
 if __name__=='__main__':
     port=int(os.environ.get("PORT",5000))
