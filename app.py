@@ -1,5 +1,7 @@
 from flask import Flask,render_template,request,redirect,url_for
 import random
+import requests
+import json
 import os
 app=Flask(__name__)
 import Algorithmia
@@ -28,6 +30,55 @@ def summarizeCode():
             sen="This text is strong."
         else:
             sen="This text is very strong."
+        pixabay = {
+            'username':'Nanikamal',
+            'key':'4770023-279e0ea8fa77c59e0bd5e2486'
+        }
+        username='Nanikamal'
+        key='4770023-279e0ea8fa77c59e0bd5e2486'
+        first=tags[0]
+        second=tags[1]
+        third=tags[2]
+        page=1
+        pixabay_response1 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+first+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response2 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+second+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response3 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+third+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response1 = pixabay_response1.json()
+        pixabay_response2 = pixabay_response2.json()
+        pixabay_response3 = pixabay_response3.json()
+        images1 = []
+        images2 = []
+        images3 = []
+    	for item in pixabay_response1['hits']:
+    		images1.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+        for item in pixabay_response2['hits']:
+    		images2.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+        for item in pixabay_response3['hits']:
+    		images3.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
         return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,tags=tags)
     else:
         return render_template('summarizerform.html')
