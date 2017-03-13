@@ -69,19 +69,24 @@
                 </div>
     <p>{{sen}}</p>
     <h4>Tags</h4>
-    <p>{{tags}}</p>
+    <p>1.{{tags[0]}}</p>
+    <p>2.{{tags[1]}}</p>
+    <p>3.{{tags[2]}}</p>
+    <p>4.{{tags[3]}}</p>
+    <p>5.{{tags[4]}}</p>
+    <p>6.{{tags[5]}}</p>
     <h4>Images</h4>
     <h4>Tag1:{{tags[0]}}</h4>
    {% for image in images1 %}
-        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="150px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
+        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="180px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
     {% endfor %}
     <h4>Tag2:{{tags[1]}}</h4>
     {% for image in images2 %}
-        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="150px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
+        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="180px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
     {% endfor %}
     <h4>Tag3:{{tags[2]}}</h4>
     {% for image in images3 %}
-        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="150px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
+        <div class='image'><a href="/edit/?url={{image.full_size}}"><img width="180px" height="150px" padding-bottom="2px" src="{{image.preview}}"></a></div>
     {% endfor %}
 </div>
 
