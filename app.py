@@ -79,7 +79,55 @@ def summarizeCode():
     		images2.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
         for item in pixabay_response3['hits']:
     		images3.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
+        #flickr image search
+        flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
+        extras='url_sq,url_t,url_s,url_q,url_m,url_n,url_z,url_c,url_l,url_o'
+        #first tag
+        query= flickr.photos.search(text=first, per_page=3, extras=extras)
+        photos = query['photos']
+        pho= photos['photo']
+        p=pho[0]
+        q=pho[1]
+        r=pho[2]
+        url1=p['url_o']
+        url2=q['url_o']
+        url3=r['url_o']
+        u1=url1.encode('utf-8')
+        u2=url2.encode('utf-8')
+        u3=url3.encode('utf-8')
+        print photos
+        #first tag
+        #second tag
+        que= flickr.photos.search(text=second, per_page=3, extras=extras)
+        frame = que['photos']
+        phot= frame['photo']
+        s=phot[0]
+        t=phot[1]
+        u=phot[2]
+        url4=s['url_o']
+        url5=t['url_o']
+        url6=u['url_o']
+        u4=url4.encode('utf-8')
+        u5=url5.encode('utf-8')
+        u6=url6.encode('utf-8')
+        print frame
+        #second tag
+        #third tag
+        quet= flickr.photos.search(text=third, per_page=3, extras=extras)
+        snap = quet['photos']
+        phor= snap['photo']
+        v=phor[0]
+        w=phor[1]
+        x=phor[2]
+        url7=v['url_o']
+        url8=w['url_o']
+        url9=x['url_o']
+        u7=url7.encode('utf-8')
+        u8=url8.encode('utf-8')
+        u9=url9.encode('utf-8')
+        print snap
+        #third tag
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,u1=u1,u2=u2,u3=u3,u4=u4,u5=u5,u6=u6,u7=u7,u8=u8,u9=u9,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
     else:
         return render_template('summarizerform.html')
 
