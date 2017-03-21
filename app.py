@@ -5,8 +5,13 @@ import json
 import os
 app=Flask(__name__)
 import Algorithmia
+import flickr
+from flickrapi import FlickrAPI
+import urllib2
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
+FLICKR_PUBLIC = 'cec2c29a56c689b48ab04e59680e152d'
+FLICKR_SECRET = 'b3ae1b59e093ec86'
 
 @app.route('/',methods=['GET','POST'])
 def summarizeCode():

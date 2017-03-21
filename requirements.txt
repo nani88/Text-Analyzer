@@ -3,6 +3,9 @@ click==6.7
 enum34==1.1.6
 flask==0.12
 futures==3.0.5
+python-flickr==0.3.2
+flickrapi==2.0
+unidecode==0.4.20
 indicoio==1.0.8
 itsdangerous==0.24
 jinja2==2.9.5
