@@ -52,7 +52,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+first+
-    		'&image_type=photo&per_page=3&image_type=photo&'
+    		'&image_type=photo&per_page=4&image_type=photo&'
     	)
         pixabay_response2 = requests.get(
     		'http://pixabay.com/api/?username='
@@ -61,7 +61,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+second+
-    		'&image_type=photo&per_page=3&image_type=photo&'
+    		'&image_type=photo&per_page=4&image_type=photo&'
     	)
         pixabay_response3 = requests.get(
     		'http://pixabay.com/api/?username='
@@ -70,7 +70,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+third+
-    		'&image_type=photo&per_page=3&image_type=photo&'
+    		'&image_type=photo&per_page=4&image_type=photo&'
     	)
         pixabay_response1 = pixabay_response1.json()
         pixabay_response2 = pixabay_response2.json()
@@ -96,10 +96,8 @@ def summarizeCode():
         r=pho[2]
         url1=p['url_o']
         url2=q['url_o']
-        url3=r['url_o']
         u1=url1.encode('utf-8')
         u2=url2.encode('utf-8')
-        u3=url3.encode('utf-8')
         print photos
         #first tag
         #second tag
@@ -111,10 +109,8 @@ def summarizeCode():
         u=phot[2]
         url4=s['url_o']
         url5=t['url_o']
-        url6=u['url_o']
         u4=url4.encode('utf-8')
         u5=url5.encode('utf-8')
-        u6=url6.encode('utf-8')
         print frame
         #second tag
         #third tag
@@ -126,13 +122,11 @@ def summarizeCode():
         x=phor[2]
         url7=v['url_o']
         url8=w['url_o']
-        url9=x['url_o']
         u7=url7.encode('utf-8')
         u8=url8.encode('utf-8')
-        u9=url9.encode('utf-8')
         print snap
         #third tag
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,u1=u1,u2=u2,u3=u3,u4=u4,u5=u5,u6=u6,u7=u7,u8=u8,u9=u9,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,u1=u1,u2=u2,u4=u4,u5=u5,u7=u7,u8=u8,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
     else:
         return render_template('summarizerform.html')
 
