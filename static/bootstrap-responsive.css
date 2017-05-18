@@ -1107,3 +1107,16 @@
     overflow: visible !important;
   }
 }
+progress {
+  background-color: #33bdef;
+  border: 0;
+  height: 18px;
+  border-radius: 9px;
+}
+.progress {
+	height: 40px;
+}
+.progress-bar {
+  font-size: 14px;
+  line-height: 40px;
+}
