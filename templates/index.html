@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="{{url_for('static',filename='favicon.png')}}">
+<title>AiArtist</title>
+<!-- Bootstrap core CSS -->
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='bootstrap.mins.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='plugins.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='prettify.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='aistyle.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='green.css')}}">
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,700,600,500,300|Libre+Baskerville:400,400italic|Archivo+Black' rel='stylesheet' type='text/css'>
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='fontello.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='budicons.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="{{url_for('static',filename='jquery.min.js')}}"></script> 
+<script src="{{url_for('static',filename='bootstrap.min.js')}}"></script> 
+<style>
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+.contacttxt {
+	font-family: 'Archivo Black', sans-serif; font-style: normal;
+}
+</style>
+<script>
+function sendContact() {
+    var valid;
+	var name = $("#username").val();
+	var email = $("#email").val();
+	var sub = $("#subject").val();
+	var msg = $("#msg").val();
+	var dataString = 'userName=' + name + '&userEmail=' + email + '&subject=' + sub + '&content=' + msg;
+    valid = validateContact();
+    if(valid) {
+		$("#mail-status").html('<div class="col-sm-12"><div style="border-color: white; border-width: 4px; background: transparent;" class="well well-lg text-center"><h3 class="blink_me contacttxt">Please wait while we are sending your mail....</h3></div></div>');
+        jQuery.ajax({
+            type: "POST",
+            url: "{{url_for('static',filename='mail.php')}}",
+            data: dataString,
+			cache : false,
+            success:function(data){
+                $("#mail-status").html(data);
+            },
+            error:function (){}
+        });
+    }
+}
+function validateContact() {
+    var valid = true;	
+    $(".valid").css('border-color','');
+    if(!$("#username").val()) {
+        $("#username").css('border-color','red');
+        valid = false;
+    }
+    if(!$("#email").val()) {
+        $("#email").css('border-color','red');
+        valid = false;
+    }
+    if(!$("#email").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+        $("#email").css('border-color','red');
+        valid = false;
+    }
+    if(!$("#subject").val()) {
+        $("#subject").css('border-color','red');
+        valid = false;
+    }
+    if(!$("#msg").val()) {
+        $("#msg").css('border-color','red');
+        valid = false;
+    }
+    return valid;
+}
+</script>
+</head>
+<body class="full-layout">
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+<div class="body-wrapper">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header"> <a class="btn responsive-menu" data-toggle="collapse" data-target=".navbar-collapse"><i></i></a>
+      <div class="navbar-brand text-center"> <a href=""><img id="iconimg" src="{{url_for('static',filename='logo-head.png')}}" alt="" data-src="{{url_for('static',filename='logo-head.png')}}" data-ret="{{url_for('static',filename='logo-head.png')}}" class="retina" /></a> </div>
+      <!-- /.navbar-brand --> 
+    </div>
+    <!-- /.navbar-header -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="current"><a href="#home" class="hint--right" data-hint="Home"><i class="budicon-home-1"></i><span>Home</span></a></li>
+        <li><a href="#about" class="hint--right" data-hint="About"><i class="budicon-author"></i><span>About</span></a></li>
+        <li><a href="#portfolio" class="hint--right" data-hint="Portfolio"><i class="budicon-image"></i><span>Portfolio</span></a></li>
+        <li><a href="#contact" class="hint--right" data-hint="Contact"><i class="budicon-profile"></i><span>Contact</span></a></li>
+        <li><a href="/analyze/" class="hint--right" data-hint="Demo"><i class="budicon-note-7"></i><span>Demo</span></a></li>
+      </ul>
+      <!-- /.navbar-nav --> 
+    </div>
+    <!-- /.navbar-collapse -->
+    <div id="elsewhere" style="display:none;">
+      <h1>Me, Elsewhere</h1>
+      <div class="divide20"></div>
+      <ul class="social">
+        <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-s-instagram"></i></a></li>
+        <li><a href="#"><i class="icon-s-flickr"></i></a></li>
+        <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
+        <li><a href="#"><i class="icon-s-linkedin"></i></a></li>
+      </ul>
+    </div>
+    <!-- /#elsewhere --> 
+  </nav>
+  <!-- /.navbar -->
+  
+  <section id="home" class="naked">
+    <div class="fullscreenbanner-container revolution">
+      <div class="fullscreenbanner">
+        <ul>
+          <li data-transition="fade"> <img src="{{url_for('static',filename='dummy.png')}}"  alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="repeat">
+            <h1 style="font-family: 'Archivo Black', sans-serif;" class="tp-caption caption large sfb" data-x="center" data-y="center" data-voffset="-25" data-speed="900" data-start="1000" data-endspeed="100" data-easing="Sine.easeOut">AiArtist</h1>
+            <div class="tp-caption small tp-fade fadeout tp-resizeme" data-x="center" data-y="center" data-voffset="25" data-speed="100"
+			data-start="1500"
+			data-easing="Power4.easeOut"
+			data-splitin="chars"
+			data-splitout="chars"
+			data-elementdelay="0.03"
+			data-endelementdelay="0"
+			data-endspeed="100"
+			data-endeasing="Power1.easeOut"
+			style="z-index: 3; max-width: auto; max-height: auto; white-space: nowrap; font-family: 'Archivo Black', sans-serif; font-style: normal;">An Artificial Intelligence artist to illustrate your stories.</div>
+            <div class="arrow smooth"><a href="#about"><i class="icon-down-open-big"></i></a></div>
+          </li>
+        </ul>
+        <div class="tp-bannertimer"></div>
+      </div>
+      <!-- /.fullscreenbanner --> 
+    </div>
+    <!-- /.revolution --> 
+  </section>
+  <!-- /#home -->
+  
+  <div class="container">    
+    <section id="about">
+      <div class="box">
+        <div class="row">
+	      <div class="col-sm-12 text-center">
+            <img style="width: 15%;" src="{{url_for('static',filename='logo-head.png')}}" alt="" />
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="clearfix"></div>
+        <div class="divide40"></div>
+        <div class="divide10"></div>
+        <div class="services-1">
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="icon"> <i class="budicon-note-3 icn"></i> </div>
+              <!-- /.icon -->
+              <div class="text">
+                <h5>Summarize</h5>
+                <p>Whether you are a seasoned writer or a casual blogger, our AI summarizes and understands the content that you have written.</p>
+              </div>
+              <!-- /.text --> 
+            </div>
+            <!-- /column -->
+            <div class="col-md-4 col-sm-6">
+              <div class="icon"> <i class="icon-picture-1 icn"></i> </div>
+              <!-- /.icon -->
+              <div class="text">
+                <h5>Illustrate</h5>
+                <p>We believe a great story needs equally great illustrations to bring your vision into life. Our AI generates illustrations all on its own making your story more compelling.</p>
+              </div>
+              <!-- /.text --> 
+            </div>
+            <!-- /column -->
+            <div class="col-md-4 col-sm-6">
+              <div class="icon"> <i class="icon-brush icn"></i> </div>
+              <!-- /.icon -->
+              <div class="text">
+                <h5>Stylize</h5>
+                <p>Our AI is no ordinary artist. Tell it to illustrate your story with your favourite artist’s style and it learns to do so.</p>
+              </div>
+              <!-- /.text --> 
+            </div>
+            <!-- /column --> 
+			<div class="divide30"></div>
+            <!-- /column --> 
+          </div>
+          <!-- /.row --> 
+        </div>
+        <!-- /.services --> 
+        
+      </div>
+      <!-- /.box --> 
+    </section>
+    <!-- /#about -->
+    
+	
+    <section id="portfolio" class="portfolio">
+      <div class="box">
+        <h2 class="section-title pull-left">Gallery</h2>
+        <!-- /#filters-container -->
+        <div class="clearfix"></div>
+        <div id="grid-container" class="cbp-l-grid-masonry">
+          <ul>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='1.jpg')}}" alt=""> </div>
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='7.jpg')}}" alt=""> </div> 
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='2.jpg')}}" alt=""> </div>
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='3.jpg')}}" alt=""> </div> 
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='4.jpg')}}" alt=""> </div>
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='5.jpg')}}" alt=""> </div>
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='6.jpg')}}" alt=""> </div>
+            </li>
+            <li class="cbp-item frame architecture">
+              <div class="cbp-caption-defaultWrap"> <img src="{{url_for('static',filename='13.jpg')}}" alt=""> </div>
+            </li>
+          </ul>
+        </div>
+        <!-- /.cbp-l-grid-masonry -->
+        <!--<div class="cbp-l-loadMore-button"> <a href="ajax/port1-more.php" class="cbp-l-loadMore-button-link btn">LOAD MORE</a> </div>-->
+      </div>
+      <!-- /.box --> 
+    </section>
+	
+    <section id="contact">
+      <div class="box">
+        <h2 class="section-title">Contact Us</h2>
+        <p></p>
+        <div class="divide20"></div>
+        <div class="row text-center services-2">
+          <div class="col-sm-6"> <i class="budicon-map"></i>
+            <p>Sunnyvale, California <br />
+              United States - 94087</p>
+          </div>
+          <div class="col-sm-6"> <i class="budicon-mail"></i>
+            <p><a class="nocolor" target="_blank" href="mailto:support@aiartist.io">support@aiartist.io</a> </p>
+          </div>
+        </div>
+        <!-- /.services-2 -->
+        <div class="divide30"></div>
+        <div class="form-container">
+		  <form class="forms" id="frmContact" action="{{url_for('static',filename='mail.php')}}" method="post">
+            <fieldset>
+              <div class="row">
+			  <div id="mail-status">
+                <div class="col-sm-6">
+                  <div class="form-row text-input-row name-field">
+                    <label>Name</label>
+                    <input type="text" name="name" id="username" class="valid text-input defaultText required"/>
+                  </div>
+                  <div class="form-row text-input-row email-field">
+                    <label>Email</label>
+                    <input type="text" name="email" id="email" class="valid text-input defaultText required email"/>
+                  </div>
+                  <div class="form-row text-input-row subject-field">
+                    <label>Subject</label>
+                    <input type="text" name="subject" id="subject" class="valid text-input defaultText required"/>
+                  </div>
+                </div>
+                <div class="col-sm-6 lp5">
+                  <div class="form-row text-area-row">
+                    <label>Message</label>
+                    <textarea name="msg" id="msg" class="valid text-area required"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="button-row pull-right">
+                    <button name="submit"  onClick="sendContact();" class="btn btn-submit bm0">Send Message</button>
+                  </div>
+                </div>
+                <div class="col-sm-6 lp5">
+                  <div class="button-row pull-left">
+                    <input type="reset" value="Clear Message" name="reset" class="btn btn-submit bm0" />
+                  </div>
+                </div>
+				</div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <!-- /.form-container --> 
+        
+      </div>
+      <!-- /.box --> 
+    </section>
+    <!-- /#contact -->
+    
+    <footer class="footer box text-center">© 2017 AiArtist. All rights reserved.
+      <!--<ul class="social pull-right">
+        <li><a href="#"><i class="icon-s-rss"></i></a></li>
+        <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-s-dribbble"></i></a></li>
+        <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
+        <li><a href="#"><i class="icon-s-instagram"></i></a></li>
+        <li><a href="#"><i class="icon-s-vimeo"></i></a></li>
+      </ul>-->
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer --> 
+    
+  </div>
+  <!-- /.container --> 
+</div>
+<!-- /.body-wrapper --> 
+<script src="{{url_for('static',filename='jquery.themepunch.tools.min.js')}}"></script> 
+<script src="{{url_for('static',filename='classie.js')}}"></script> 
+<script src="{{url_for('static',filename='plugins.js')}}"></script> 
+<script src="{{url_for('static',filename='scripts.js')}}"></script>  
+<script>
+	$.backstretch(["{{url_for('static',filename='bg1.jpg')}}"]);
+</script>
+<script>
+var width = $(window).width();
+if (width < 1270) {
+$(".retina").css({"width": "50px", "height": "40px"});
+} else  {
+$(".retina").css("width", "75%");
+}
+</script>
+</body>
+</html>
