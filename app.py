@@ -112,7 +112,7 @@ def summarizeCode():
     		images2.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
         for item in pixabay_response3['hits']:
     		images3.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,u1=u1,u2=u2,u4=u4,u5=u5,u7=u7,u8=u8,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
     else:
         return render_template('summarizerform.html')
 
