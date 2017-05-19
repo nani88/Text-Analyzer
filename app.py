@@ -83,7 +83,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+first+
-    		'&image_type=photo&per_page=4&image_type=photo&'
+    		'&image_type=photo&per_page=3&image_type=photo&'
     	)
         pixabay_response2 = requests.get(
     		'http://pixabay.com/api/?username='
@@ -92,7 +92,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+second+
-    		'&image_type=photo&per_page=4&image_type=photo&'
+    		'&image_type=photo&per_page=3&image_type=photo&'
     	)
         pixabay_response3 = requests.get(
     		'http://pixabay.com/api/?username='
@@ -101,7 +101,7 @@ def summarizeCode():
     		+key+
     		'&search_term='
     		+third+
-    		'&image_type=photo&per_page=4&image_type=photo&'
+    		'&image_type=photo&per_page=3&image_type=photo&'
     	)
         pixabay_response1 = pixabay_response1.json()
         pixabay_response2 = pixabay_response2.json()
