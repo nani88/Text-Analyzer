@@ -45,7 +45,7 @@ def index():
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
-        gs=goslate.Goslate()
+        gs=goslate.Goslate(service_urls=['http://translate.google.de'])
         input=request.form['text']
         output=gs.translate(input,'en')
         algo=client.algo('nlp/Summarizer/0.1.3')
