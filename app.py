@@ -11,6 +11,7 @@ import urllib2
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+import goslate
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
 
@@ -44,14 +45,16 @@ def index():
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
+        gs=goslate.Goslate()
         input=request.form['text']
+        output=gs.translate(input,'en')
         algo=client.algo('nlp/Summarizer/0.1.3')
         alg=client.algo('nlp/AutoTag/1.0.1')
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
-        summ=algo.pipe(request.form['text']).result
-        tag=alg.pipe(request.form['text']).result
+        summ=algo.pipe(output).result
+        tag=alg.pipe(output).result
         tags=[stag.encode('utf-8') for stag in tag]
-        sent=al.pipe(request.form['text']).result
+        sent=al.pipe(output).result
         senti=sent*20
         if senti==20:
             sen="This text is very weak."
