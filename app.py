@@ -45,10 +45,10 @@ def index():
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
-        proxy_handler = urllib2.ProxyHandler({"https" : "https://proxy-domain.name:8080"})
+        proxy_handler = urllib2.ProxyHandler({"http" : "http://proxy-domain.name:8080"})
         proxy_opener = urllib2.build_opener(urllib2.HTTPHandler(proxy_handler),
                                         urllib2.HTTPSHandler(proxy_handler))
-        gs_with_proxy = goslate.Goslate(opener=proxy_opener,retry_times=100,executor=None, timeout=100, service_urls=(u'http://translate.google.de', ), debug=False)
+        gs_with_proxy = goslate.Goslate(opener=proxy_opener,retry_times=100,executor=None, timeout=100, service_urls=('http://translate.google.de' ), debug=False)
         input=request.form['text']
         output=gs_with_proxy.translate(input,'en')
         algo=client.algo('nlp/Summarizer/0.1.3')
