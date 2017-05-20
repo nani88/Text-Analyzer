@@ -50,11 +50,7 @@ def summarizeCode():
                                         urllib2.HTTPSHandler(proxy_handler))
         gs_with_proxy = goslate.Goslate(opener=proxy_opener)
         input=request.form['text']
-        lang=gs_with_proxy.detect(input)
-        if lang!='en':
-            output=gs_with_proxy.translate(input,'en')
-        elif lang=='en':
-            output=input
+        output=gs_with_proxy.translate(input,'en')
         algo=client.algo('nlp/Summarizer/0.1.3')
         alg=client.algo('nlp/AutoTag/1.0.1')
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
