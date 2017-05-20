@@ -45,12 +45,16 @@ def index():
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
-        proxy_handler = urllib2.ProxyHandler({"http" : "http://proxy-domain.name:8080"})
+        proxy_handler = urllib2.ProxyHandler({"https" : "https://proxy-domain.name:8080"})
         proxy_opener = urllib2.build_opener(urllib2.HTTPHandler(proxy_handler),
                                         urllib2.HTTPSHandler(proxy_handler))
         gs_with_proxy = goslate.Goslate(opener=proxy_opener)
         input=request.form['text']
-        output=gs_with_proxy.translate(input,'en')
+        lang=gs_with_proxy.detect(input)
+        if lang!='en':
+            output=gs_with_proxy.translate(input,'en')
+        elif lang=='en':
+            output=input
         algo=client.algo('nlp/Summarizer/0.1.3')
         alg=client.algo('nlp/AutoTag/1.0.1')
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
