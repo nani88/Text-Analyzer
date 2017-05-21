@@ -21,7 +21,7 @@ FLICKR_PUBLIC = 'cec2c29a56c689b48ab04e59680e152d'
 FLICKR_SECRET = 'b3ae1b59e093ec86'
 
 
-@app.route('/index/',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def index():
     if request.method=='POST':
         fromaddr = "mail@aiartist.io"
