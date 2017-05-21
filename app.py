@@ -1,23 +1,27 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for,send_file
 import random
-import requests
-import json
 import os
+import requests
+import re
+import cookielib
+import json
 app=Flask(__name__)
 import Algorithmia
-import flickr
-from flickrapi import FlickrAPI
 import urllib2
+import StringIO
+from flickrapi import FlickrAPI
+import flickr
+from flask import Flask,render_template,url_for,request,redirect
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
-import goslate
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
+FLICKR_PUBLIC = 'cec2c29a56c689b48ab04e59680e152d'
+FLICKR_SECRET = 'b3ae1b59e093ec86'
 
 
-
-@app.route('/',methods=['GET','POST'])
+@app.route('/index/',methods=['GET','POST'])
 def index():
     if request.method=='POST':
         fromaddr = "mail@aiartist.io"
@@ -40,35 +44,29 @@ def index():
     else:
         return render_template('index.html')
 
-
-
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
-        proxy_handler = urllib2.ProxyHandler({"http" : "http://proxy-domain.name:8080"})
-        proxy_opener = urllib2.build_opener(urllib2.HTTPHandler(proxy_handler),
-                                        urllib2.HTTPSHandler(proxy_handler))
-        gs_with_proxy = goslate.Goslate(opener=proxy_opener,retry_times=100,executor=None, timeout=100, service_urls=('http://translate.google.de' ), debug=False)
         input=request.form['text']
-        output=gs_with_proxy.translate(input,'en')
         algo=client.algo('nlp/Summarizer/0.1.3')
         alg=client.algo('nlp/AutoTag/1.0.1')
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
-        summ=algo.pipe(output).result
-        tag=alg.pipe(output).result
+        summ=algo.pipe(input).result
+        tag=alg.pipe(input).result
         tags=[stag.encode('utf-8') for stag in tag]
-        sent=al.pipe(output).result
+        sent=al.pipe(input).result
         senti=sent*20
         if senti==20:
-            sen="This text is very weak."
+            sen="This text is very weak"
         elif senti==40:
-            sen="This text is weak."
+            sen="This text is weak"
         elif senti==60:
-            sen="This text is neutral."
+            sen="This text is neutral"
         elif senti==80:
-            sen="This text is strong."
+            sen="This text is strong"
         else:
             sen="This text is very strong."
+        #pixabay image search
         pixabay = {
             'username':'Nanikamal',
             'key':'4770023-279e0ea8fa77c59e0bd5e2486'
@@ -113,14 +111,24 @@ def summarizeCode():
         images2 = []
         images3 = []
     	for item in pixabay_response1['hits']:
-    		images1.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+            url=item['webformatURL'].split('_')[0]
+            res="_960.jpg"
+            url=url+res
+            images1.append({'preview':item['previewURL'], 'full_size':url,'mid':item['webformatURL']})
         for item in pixabay_response2['hits']:
-    		images2.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+            url=item['webformatURL'].split('_')[0]
+            res="_960.jpg"
+            url=url+res
+            images2.append({'preview':item['previewURL'], 'full_size':url,'mid':item['webformatURL']})
         for item in pixabay_response3['hits']:
-    		images3.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
+            url=item['webformatURL'].split('_')[0]
+            res="_960.jpg"
+            url=url+res
+            images3.append({'preview':item['previewURL'], 'full_size':url,'mid':item['webformatURL']})
+        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,images1=images1,images2=images2,images3=images3,tags=tags)
     else:
         return render_template('summarizerform.html')
+
 
 if __name__=='__main__':
     port=int(os.environ.get("PORT",5000))
