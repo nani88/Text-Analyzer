@@ -47,14 +47,18 @@ def index():
 @app.route('/analyze/',methods=['GET','POST'])
 def summarizeCode():
     if request.method=='POST':
-        input=request.form['text']
+        entry=request.form['text']
+        input = {"to":"en","text":entry}
         algo=client.algo('nlp/Summarizer/0.1.3')
         alg=client.algo('nlp/AutoTag/1.0.1')
         al=client.algo('nlp/SentimentAnalysis/1.0.3')
-        summ=algo.pipe(input).result
-        tag=alg.pipe(input).result
+        trans=client.algo('translation/YandexTranslate/0.1.2')
+        data=trans.pipe(input).result
+        data=[word.encode('utf-8') for word in data]
+        summ=algo.pipe(data).result
+        tag=alg.pipe(data).result
         tags=[stag.encode('utf-8') for stag in tag]
-        sent=al.pipe(input).result
+        sent=al.pipe(data).result
         senti=sent*20
         if senti==20:
             sen="This text is very weak"
@@ -125,7 +129,7 @@ def summarizeCode():
             res="_960.jpg"
             url=url+res
             images3.append({'preview':item['previewURL'], 'full_size':url,'mid':item['webformatURL']})
-        return render_template('Summaryfinal.html',summ=summ,input=input,senti=senti,sen=sen,images1=images1,images2=images2,images3=images3,tags=tags)
+        return render_template('Summaryfinal.html',summ=summ,input=input,entry=entry,senti=senti,sen=sen,images1=images1,images2=images2,images3=images3,tags=tags)
     else:
         return render_template('summarizerform.html')
 
