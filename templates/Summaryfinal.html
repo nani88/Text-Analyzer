@@ -142,36 +142,7 @@
 <div class="span5 offset1">
     <h4>Original Text</h4>
     <p>{{entry}}    </p>
-</div>
-<div class="span5">
-    <h4>Summarized Text</h4>
-    <p>
-    {{summ}}
-    </p>
-    <h4>Sentiment-analysis</h4>
-      <div class="clearfix">
-
-                <div class="c100 p{{senti}}">
-                    <span>{{senti}}%</span>
-                    <div class="slice">
-                        <div class="bar"></div>
-                        <div class="fill"></div>
-                    </div>
-                </div>
-                </div>
-    <p>{{sen}}</p>
-    <h4>Tags</h4>
-    <p>1.{{tags[0]}}</p>
-    <p>2.{{tags[1]}}</p>
-    <p>3.{{tags[2]}}</p>
-    <p>4.{{tags[3]}}</p>
-    <p>5.{{tags[4]}}</p>
-    <p>6.{{tags[5]}}</p>
-     <p>7.{{tags[6]}}</p>
-
-                </div>
-            </div>
-            <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:640px;height:440px;overflow:hidden;visibility:hidden;background-color:#24262e;">
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:640px;height:440px;overflow:hidden;visibility:hidden;background-color:#24262e;">
         <!-- Loading Screen -->
         <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:640px;height:360px;overflow:hidden;">
@@ -212,6 +183,36 @@
         <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
         <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
     </div>
+</div>
+<div class="span5">
+    <h4>Summarized Text</h4>
+    <p>
+    {{summ}}
+    </p>
+    <h4>Sentiment-analysis</h4>
+      <div class="clearfix">
+
+                <div class="c100 p{{senti}}">
+                    <span>{{senti}}%</span>
+                    <div class="slice">
+                        <div class="bar"></div>
+                        <div class="fill"></div>
+                    </div>
+                </div>
+                </div>
+    <p>{{sen}}</p>
+    <h4>Tags</h4>
+    <p>1.{{tags[0]}}</p>
+    <p>2.{{tags[1]}}</p>
+    <p>3.{{tags[2]}}</p>
+    <p>4.{{tags[3]}}</p>
+    <p>5.{{tags[4]}}</p>
+    <p>6.{{tags[5]}}</p>
+     <p>7.{{tags[6]}}</p>
+
+                </div>
+            </div>
+            
     <script type="text/javascript">jssor_1_slider_init();</script>
            
     </body>
