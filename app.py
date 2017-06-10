@@ -131,7 +131,7 @@ def summarizeCode():
             images3.append({'preview':item['previewURL'], 'full_size':url,'mid':item['webformatURL']})
         return render_template('Summaryfinal.html',summ=summ,input=input,entry=entry,senti=senti,sen=sen,images1=images1,images2=images2,images3=images3,tags=tags)
     else:
-        return render_template('summarizerform.html')
+        return render_template('form.html')
 
 
 if __name__=='__main__':

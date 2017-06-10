@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="{{url_for('static',filename='favicon.png')}}">
+<title>AiArtist</title>
+<!-- Bootstrap core CSS -->
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='bootstrap.mins.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='plugins.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='prettify.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='aistyle.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='green.css')}}">
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,700,600,500,300|Libre+Baskerville:400,400italic|Archivo+Black' rel='stylesheet' type='text/css'>
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='fontello.css')}}">
+<link rel=stylesheet type=text/css href="{{url_for('static',filename='budicons.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="{{url_for('static',filename='jquery.min.js')}}"></script> 
+<script src="{{url_for('static',filename='bootstrap.min.js')}}"></script> 
+<style>
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+.contacttxt {
+	font-family: 'Archivo Black', sans-serif; font-style: normal;
+}
+</style>
+</head>
+<body class="full-layout">
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+<div class="body-wrapper">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header"> <a class="btn responsive-menu" data-toggle="collapse" data-target=".navbar-collapse"><i></i></a>
+      <div class="navbar-brand text-center"> <a href=""><img id="iconimg" src="{{url_for('static',filename='logo-head.png')}}" alt="" data-src="{{url_for('static',filename='logo-head.png')}}" data-ret="{{url_for('static',filename='logo-head.png')}}" class="retina" /></a> </div>
+      <!-- /.navbar-brand --> 
+    </div>
+    <!-- /.navbar-header -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="current"><a href="/" class="hint--right" data-hint="Home"><i class="budicon-home-1"></i><span>Home</span></a></li>
+       <!--<li><a href="#about" class="hint--right" data-hint="About"><i class="budicon-author"></i><span>About</span></a></li>
+        <li><a href="#portfolio" class="hint--right" data-hint="Portfolio"><i class="budicon-image"></i><span>Portfolio</span></a></li>
+        <li><a href="#contact" class="hint--right" data-hint="Contact"><i class="budicon-profile"></i><span>Contact</span></a></li>
+        <li><a href="/analyze/" class="hint--right" data-hint="Demo"><i class="budicon-note-7"></i><span>Demo</span></a></li>-->
+      </ul>
+      <!-- /.navbar-nav --> 
+    </div>
+    <!-- /.navbar-collapse -->
+    <div id="elsewhere" style="display:none;">
+      <h1>Me, Elsewhere</h1>
+      <div class="divide20"></div>
+      <ul class="social">
+        <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-s-instagram"></i></a></li>
+        <li><a href="#"><i class="icon-s-flickr"></i></a></li>
+        <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
+        <li><a href="#"><i class="icon-s-linkedin"></i></a></li>
+      </ul>
+    </div>
+    <!-- /#elsewhere --> 
+  </nav>
+  <!-- /.navbar -->
+  
+  
+  <!-- /#home -->
+  
+  <div class="container">    
+    
+    <section id="contact">
+      <div class="box">
+        <h2 class="section-title" style="text-align: center"> Please enter the Text</h2>
+        <!-- /.services-2 -->
+        <div class="form-container">
+		  <form   action="{{url_for('summarizeCode')}}" method='post'>
+            <fieldset>
+              <div class="row">
+			  <div id="mail-status">
+                <div class="col-sm-12">
+                  <div class="form-row text-input-row name-field">
+                    <textarea name='text' cols=50 rows=18 placeholder="Enter the text"> 
+</textarea>
+                  </div>
+                <div class="col-sm-6 lp5">
+                  <div class="button-row pull-right">
+                    <input type="submit" value="Analyze"  class="btn btn-submit bm0" />
+                  </div>
+                </div>
+				</div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <!-- /.form-container --> 
+        
+      </div>
+      <!-- /.box --> 
+    </section>
+    <!-- /#contact -->
+    
+    <footer class="footer box text-center">© 2017 AiArtist. All rights reserved.
+      <!--<ul class="social pull-right">
+        <li><a href="#"><i class="icon-s-rss"></i></a></li>
+        <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+        <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+        <li><a href="#"><i class="icon-s-dribbble"></i></a></li>
+        <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
+        <li><a href="#"><i class="icon-s-instagram"></i></a></li>
+        <li><a href="#"><i class="icon-s-vimeo"></i></a></li>
+      </ul>-->
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer --> 
+    
+  </div>
+  <!-- /.container --> 
+</div>
+<!-- /.body-wrapper --> 
+<script src="{{url_for('static',filename='jquery.themepunch.tools.min.js')}}"></script> 
+<script src="{{url_for('static',filename='classie.js')}}"></script> 
+<script src="{{url_for('static',filename='plugins.js')}}"></script> 
+<script src="{{url_for('static',filename='scripts.js')}}"></script>  
+<script>
+	$.backstretch(["{{url_for('static',filename='bg1.jpg')}}"]);
+</script>
+<script>
+var width = $(window).width();
+if (width < 1270) {
+$(".retina").css({"width": "50px", "height": "40px"});
+} else  {
+$(".retina").css("width", "75%");
+}
+</script>
+</body>
+</html>
