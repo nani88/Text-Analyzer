@@ -18,7 +18,7 @@ apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
 #db = MySQLdb.connect( host="107.178.220.200", user="aiartist", passwd="aiartist2017", db = "pixabay_links")
 
-@app.route('/index/',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def index():
     if request.method=='POST':
         fromaddr = "mail@aiartist.io"
