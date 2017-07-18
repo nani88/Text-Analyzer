@@ -10,14 +10,14 @@ import Algorithmia
 import urllib2
 import StringIO
 import traceback
-import MySQLdb
+#import MySQLdb
 from collections import Counter
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
-db = MySQLdb.connect( host="107.178.220.200", user="aiartist", passwd="aiartist2017", db = "pixabay_links")
+#db = MySQLdb.connect( host="107.178.220.200", user="aiartist", passwd="aiartist2017", db = "pixabay_links")
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -68,26 +68,52 @@ def summarizeCode():
             sen="This text is strong"
         else:
             sen="This text is very strong."
+        username='Nanikamal'
+        key='4770023-279e0ea8fa77c59e0bd5e2486'
         first=tags[0]
         second=tags[1]
         third=tags[2]
-        cursor = db.cursor()
-        searchTerms = [first,second,third]
-        sql_getLinks = 'SELECT pixabay_image_link FROM PIXABAY_SEARCH_QUERY WHERE tag in (%s)'
-        in_p=', '.join(map(lambda x: '%s', searchTerms))
-        sql_getLinks = sql_getLinks % in_p
-        cursor.execute(sql_getLinks,searchTerms)
-        results = cursor.fetchall()
-        images = Counter(results).most_common(9)
-        links=[]
-        for element in images:
-            link0=element[0][0].split('_')[0]
-            url="_150.jpg"
-            url1="_680.jpg"
-            link=link0+url
-            link1=link0+url1
-            links.append({'pre':link,'full':link1})
-        return render_template('final.html',summ=summ,input=input,entry=entry,senti=senti,sen=sen,tags=tags,links=links)
+        page=1
+        pixabay_response1 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+first+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response2 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+second+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response3 = requests.get(
+    		'http://pixabay.com/api/?username='
+    		+username+
+    		'&key='
+    		+key+
+    		'&search_term='
+    		+third+
+    		'&image_type=photo&per_page=3&image_type=photo&'
+    	)
+        pixabay_response1 = pixabay_response1.json()
+        pixabay_response2 = pixabay_response2.json()
+        pixabay_response3 = pixabay_response3.json()
+        images1 = []
+        images2 = []
+        images3 = []
+    	for item in pixabay_response1['hits']:
+    		images1.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+        for item in pixabay_response2['hits']:
+    		images2.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+        for item in pixabay_response3['hits']:
+    		images3.append({'preview':item['previewURL'], 'full_size':item['webformatURL']})
+        return render_template('final.html',summ=summ,entry=entry,data=data,senti=senti,images1=images1,images2=images2,images3=images3,sen=sen,tags=tags)
     else:
         return render_template('form.html')
 

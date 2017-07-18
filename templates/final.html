@@ -125,9 +125,15 @@
     <p>3.{{tags[2]}}</p>
     <p>4.{{tags[3]}}</p>
     <p>5.{{tags[4]}}</p>
-    <h4>Please select an image and proceed</h4>
-   {% for image in links %}
-        <div class='image'><a href="{{image.pre}}"><img width="120px" height="120px" padding-bottom="2px" src="{{image.pre}}"></a></div>
+    <h4>Images</h4>
+   {% for image in images1 %}
+        <div class='image'><a href="{{image.full_size}}"><img width="120px" height="120px" padding-bottom="2px" src="{{image.preview}}"></a></div>
+    {% endfor %}
+    {% for image in images2 %}
+        <div class='image'><a href="{{image.full_size}}"><img width="120px" height="120px" padding-bottom="2px" src="{{image.preview}}"></a></div>
+    {% endfor %}
+    {% for image in images3 %}
+        <div class='image'><a href="{{image.full_size}}"><img width="120px" height="120px" padding-bottom="2px" src="{{image.preview}}"></a></div>
     {% endfor %}
 </div>
                 </div>
