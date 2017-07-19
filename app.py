@@ -17,7 +17,7 @@ from email.MIMEText import MIMEText
 apiKey = "simJyJaH8sR1EEq+6EqwRfLtquW1"
 client=Algorithmia.client(apiKey)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('',methods=['GET','POST'])
 def index():
     if request.method=='POST':
         fromaddr = "mail@aiartist.io"
